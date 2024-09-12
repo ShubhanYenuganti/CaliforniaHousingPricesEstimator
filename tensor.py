@@ -3,6 +3,10 @@ import tensorflow as tf
 
 from sklearn.metrics import mean_squared_error, r2_score
 
+from sklearn import preprocessing
+
+import pickle
+
 # Load Data
 
 npz = np.load('California_RealEstate_train.npz')
@@ -66,3 +70,5 @@ r2 = r2_score(test_targets, test_predictions)
 
 print(f'RMSE: {rmse:.2f}')
 print(f'R-squared: {r2:.2f}')
+
+pickle.dump(model, open('model.pk1', 'wb'))
