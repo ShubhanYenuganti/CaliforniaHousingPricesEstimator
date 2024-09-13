@@ -2,12 +2,13 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from flask import Flask, request, render_template
-from sklearn import preprocessing
+from sklearn.preprocessing import OneHotEncoder
 import pickle
 
 app = Flask(__name__)
 
 model = pickle.load(open('/Users/shubhan/Desktop/Projects/HousingPricesEstimator/models/model.pk1', 'rb'))
+encoder = pickle.load(open('/Users/shubhan/Desktop/Projects/HousingPricesEstimator/models/scaler.pkl', 'rb'))
 
 # Adapt the city lookup 
 data = pd.read_csv('/Users/shubhan/Desktop/California_Real_Estate.csv')
@@ -33,15 +34,20 @@ def predict():
 
     features = np.array([int_features])
 
-    scaled_inputs = preprocessing.scale(features)
+    scaled_inputs = encoder.transform(features)
+
+    print(scaled_inputs)
 
     prediction = model.predict(scaled_inputs)
+    print(prediction)
 
     predicted_value = prediction[0][0]
 
     output = round(predicted_value, 2)
+    formatted_output = f"{output:,}"
 
-    return render_template('index.html', prediction_text = 'House Price: {}'.format(output))
+
+    return render_template('index.html', prediction_text = '${}'.format(formatted_output))
 
 if __name__ == "__main__":
     app.run()
