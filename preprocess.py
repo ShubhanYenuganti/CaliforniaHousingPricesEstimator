@@ -1,5 +1,7 @@
 import numpy as np
-from sklearn import preprocessing
+from sklearn.preprocessing import StandardScaler
+
+import pickle
 
 raw_csv_data = np.loadtxt('/Users/shubhan/Desktop/California_Real_Estate_Updated.csv', delimiter = ',')
 
@@ -7,7 +9,9 @@ unscaled_inputs_all = raw_csv_data[:,:-1]
 targets = raw_csv_data[:,-1]
 
 # Standardize the Inputs
-scaled_inputs = preprocessing.scale(unscaled_inputs_all)
+scaler = StandardScaler()
+scaler.fit(unscaled_inputs_all)
+scaled_inputs = scaler.transform(unscaled_inputs_all)
 
 # Shuffle the Data
 shuffled_indices = np.arange(scaled_inputs.shape[0])
@@ -35,3 +39,7 @@ test_targets = shuffled_targets[train_count + validation_count:]
 np.savez('California_RealEstate_train', inputs = train_inputs, target = train_targets)
 np.savez('California_RealEstate_validation', inputs = validation_inputs, target = validation_targets)
 np.savez('California_RealEstate_test', inputs = test_inputs, target = test_targets)
+
+# Save scaler
+with open('scaler.pkl', 'wb') as f:
+    pickle.dump(scaler, f)
