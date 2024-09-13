@@ -5,26 +5,28 @@
         <meta name="viewport" content = "width=device-width, initial_scale = 1.0">
 
         <title>California House Price Predictor</title>
+        <!-- Header Font-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+        
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap');
+            </style>
     </head>
-    <body style="background: #000;">
-        <div class="login">
-            <h1 style="color:violet;" California House Price Prediciton></h1>
+    <body class = "container">
+        <div id="login">
+            <h1>California House Prices Machine Learning Model</h1>
+            <form action="{{url_for('predict')}}" method = "post" id = "form">
+                <input type = "text" name = "# of beds" placeholder = "# of beds" required = "required"><br>
+                <input type = "text" name = "# of bathrooms" placeholder = "# of bathrooms"required = "required"><br>
+                <input type = "text" name = "Acre Lot Size" placeholder = "lot size (acres)" required = "required"><br>
+                <input type = "text" name = "Zip Code" placeholder = "zip code" required = "required"><br>
+                <input type = "text" name = "House Size" placeholder = "house size (sq ft)" required = "required"><br>
+                <input type = "text" name = "City" placeholder = "city" required = "required"><br>
+                <input type = "text" name = "Previous Year Sold" placeholder = "previous year sold" required = "required"><p>
 
-            <form action="{{url_for('predict')}}" method = "post">
-                <input type = "text" name = "# of beds" required = "required"><br>
-                <input type = "text" name = "# of bathrooms" required = "required"><br>
-                <input type = "text" name = "Acre Lot Size" required = "required"><br>
-                <input type = "text" name = "Zip Code" required = "required"><br>
-                <input type = "text" name = "House Size" required = "required"><br>
-                <input type = "text" name = "City" required = "required"><br>
-                <input type = "text" name = "Previous Year Sold" required = "required"><p>
-
-                <button type = "submit" class = "btn btn-primary btn-block btn-large">Prediction House Price!</button>
+                <button type = "submit" class = "btn btn-primary btn-block btn-large">Make a Prediction!</button>
             </form>
-
-            <br>
-            <br>
-            <h4 style="color:violet"> {{ prediction_text }}</h4>
+            <h4 class = "result"> {{ prediction_text }}</h4>
         </div>
     </body>
 </html>
