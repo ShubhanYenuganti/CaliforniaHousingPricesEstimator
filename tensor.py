@@ -1,9 +1,6 @@
 import numpy as np
 import tensorflow as tf
-
 from sklearn.metrics import mean_squared_error, r2_score
-
-from sklearn import preprocessing
 
 import pickle
 
@@ -44,7 +41,7 @@ model.compile(optimizer='adam', loss = 'huber', metrics = ['mae'])
 batch_size = 100
 
 # Set Epochs
-max_epochs = 200
+max_epochs = 300
 
 early_stopping = tf.keras.callbacks.EarlyStopping(patience = 10)
 
@@ -65,6 +62,8 @@ print(f'Test MAE: {test_mae:.2f}')
 
 # Alternatively, calculate RMSE and R-squared after predictions
 test_predictions = model.predict(test_inputs)
+print(test_inputs)
+print(test_predictions)
 rmse = np.sqrt(mean_squared_error(test_targets, test_predictions))
 r2 = r2_score(test_targets, test_predictions)
 
