@@ -24,7 +24,7 @@ For data distribution, I employed an 80-20 split, allocating 80% of the data to 
 For the neural network, I utilized a 5-layer neural network with relu activation function for each hidden layer. I decided to use 300 epochs that stop training after there are ten instances where the model doesn't improve its loss. 
 
 ## Results of the Model
-After evaluating the ML model with my test data, the average test loss (mean squared error) was around 160,000, and the model had an R-squared value of 0.67. Hopefully, as I learn more about TensorFlow, I can better optimize my function to lower the test loss and improve the R-squared without overfitting the model. 
+After evaluating the ML model with my test data, the average test loss (mean squared error) was around 160,000, and the model had an R-squared value of 0.69. Hopefully, as I learn more about TensorFlow, I can better optimize my function to lower the test loss and improve the R-squared without overfitting the model. 
 
 ## Front-end
 After I curated my machine learning model, I developed a front-end using Flask that uses my TensorFlow model to predict California Housing Prices based on data inputted. 
